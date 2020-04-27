@@ -1,3 +1,6 @@
+Duplicate of https://github.com/Stars-One/M3u8Downloader.git
+
+
 # m3u8视频下载合并器
 一款可以下载m3u8、解密ts文件及合并ts文件的视频下载工具
 
