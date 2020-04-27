@@ -1,34 +1,36 @@
-buildscript {
-    ext.kotlin_version = '1.2.60'
-    repositories {
-        mavenCentral()
-        jcenter()
-    }
+plugins {
+    java
 
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
+    // Apply the Kotlin JVM plugin to add support for Kotlin.
+    id("org.jetbrains.kotlin.jvm") version "1.3.41"
+
+    // Apply the application plugin to add support for building a CLI application.
+    application
 }
 
-allprojects {
-    repositories {
-        google()
-        jcenter()
-    }
+repositories {
+    // Use jcenter for resolving dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
 }
-
-apply plugin: 'kotlin'
-apply plugin: 'application'
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    testImplementation("junit:junit:4.12") 
+    // Kotlin
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+
+
 }
 
-sourceSets {
-    main.kotlin.srcDirs += 'src/main/kotlin'
+
+
+configure<JavaPluginConvention> {
+    sourceCompatibility = JavaVersion.VERSION_1_8
 }
 
-
-
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions.jvmTarget = "1.8"
+}
 
